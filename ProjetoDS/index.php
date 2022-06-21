@@ -18,6 +18,7 @@ if (isset($_POST['logout'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> <!-- JavaScript Bundle with Popper -->
@@ -29,6 +30,7 @@ if (isset($_POST['logout'])) {
     <title>PC BOOST</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/guia.png">
 </head>
+
 <body class="fundo">
     <header class="p-3 bg-dark text-white">
         <div class="container-fluid">
@@ -60,41 +62,33 @@ if (isset($_POST['logout'])) {
                 </form>
                 <li><a href="carrinho.php"><img class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" src="images/carrinho.png" width="50" height="50"></a></li>
                 <div class="text-end">
-                    <button type="button" ID="logout" class="btn btn-outline-light me-2"><a href="login.php">Logout<a></button>
+                    <button type="button" ID="logout" class="btn btn-outline-light me-2"><a href="login.php">Logout</a></button>
                 </div>
             </div>
         </div>
     </header>
-    <img id="capa" src="images/capa.png"></img>
-    <div class="container-fluid d-flex justify-content-evenly mb-50">
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <img src="images/produto.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">NOTEBOOK GAMER MSI BRAVO 15, AMD RYZEN 5 5600H, 15.6, FHD, 16GB DDR4, SSD 512GB M.2, RX 5500M 4GB, BRAVO15B5DD-243US</h5>
-                    <a href="#" class="btn btn-primary mt-1">Mais detalhes</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <img src="images/produto.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">NOTEBOOK GAMER MSI BRAVO 15, AMD RYZEN 5 5600H, 15.6, FHD, 16GB DDR4, SSD 512GB M.2, RX 5500M 4GB, BRAVO15B5DD-243US</h5>
-                    <a href="#" class="btn btn-primary mt-1">Mais detalhes</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <img src="images/produto.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">NOTEBOOK GAMER MSI BRAVO 15, AMD RYZEN 5 5600H, 15.6, FHD, 16GB DDR4, SSD 512GB M.2, RX 5500M 4GB, BRAVO15B5DD-243US</h5>
-                    <a href="#" class="btn btn-primary mt-1">Mais detalhes</a>
-                </div>
-            </div>
+
+    <img id="capa" src="images/capa.png">
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <?php
+            
+            foreach ($dados as $d) {
+                $d .=  '<div class="col">';
+                $d .= '<div class="card mx-5">';
+                $d .=     '<img src="images/produto.jpg" width="302" height="302" class="card-img-top">';
+                $d .=      '<div class="card-body">';
+                $d .=          '<h5 class="card-title">NOTEBOOK GAMER MSI BRAVO 15, AMD RYZEN 5 5600H, 15.6, FHD, 16GB DDR4, SSD 512GB M.2, RX 5500M 4GB, BRAVO15B5DD-243US</h5>';
+                $d .=          '<a href="#" class="btn btn-primary mt-1">Mais detalhes</a>';
+                $d .=        '</div>';
+                $d .=    '</div>';
+                $d .= '</div>';
+                echo $d;
+            } ?>
         </div>
     </div>
+
     <div class="d-flex flex-column h-100 mt-50">
         <footer class="w-100 py-4 flex-shrink-0">
             <div class="container py-4">
@@ -128,4 +122,5 @@ if (isset($_POST['logout'])) {
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
+
 </html>

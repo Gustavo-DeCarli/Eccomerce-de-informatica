@@ -64,6 +64,11 @@ if (isset($_POST['logout'])) {
             </div>
         </div>
     </header>
+
+
+
+
+    
     <div class="tabela container container-fluid position-static">
         <table id='chamados' class='table rounded mt-50 bg-light'>
             <thead>
@@ -87,6 +92,13 @@ if (isset($_POST['logout'])) {
             </tfoot>
         </table>
         
+
+
+
+
+
+
+
         <div class="d-flex flex-column container-fluid position-absolute start-50 translate-middle fixed-bottom">
             <footer class="w-100 py-4 flex-shrink-0 fixed-bottom">
                 <div class="container py-4">
