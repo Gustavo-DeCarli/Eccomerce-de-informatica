@@ -64,29 +64,26 @@ if (isset($_POST['logout'])) {
         </div>
     </header>
 
-    <img id="capa" src="images/capa.png">
-
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
+        <div class="detalhes row mt-50">
+            <div class="col">
             <?php
-            include 'lib/conn.php';
-            $connection = DB::getInstance();
-            $dados = $connection->query("SELECT * from produtos");
-            $dados->setFetchMode(PDO::FETCH_ASSOC);
-            foreach ($dados as $d) {
-            ?>
-                <div class="col">
-                    <div class="card  h-100">
-                        <img src="<?php echo $d['imagem']; ?>" width="380" height="302" class="card-img-top">
-                            <div class="card-footer bg-transparent border-0 mb-2">
-                                <h5 class="card-text text-center"><?php echo $d['nome']; ?></h5>
-                                <a class="btn btn-primary d-flex justify-content-center" id="botao" href="detalhes.php?id=<?php echo $d['id'] ?>">Mais detalhes</a>
-                            </div>
-                    </div>
-                </div>
-            <?php } ?>
+                include 'lib/conn.php';
+                $id = $_GET['id'];
+                $connection = DB::getInstance();
+                $dados = $connection->query("SELECT * from produtos where id=$id");
+                $dados->setFetchMode(PDO::FETCH_ASSOC);
+                foreach ($dados as $d) {
+                ?>
+                <img src="<?php echo $d['imagem']?>" width="600" height="560">
+            </div>
+            <div class="col mt-5">
+                    <a><?php echo $d['nome'] ?><br></a>
+                    <a><button type=submit class="mt-4">Adicionar ao carrinho</button>R$ <?php echo $d['valor'] ?></a>
+                <?php } ?>
+            </div>
         </div>
-    </div><br>
+    </div>
 
     <div class="d-flex flex-column h-100 mt-50">
         <footer class="w-100 py-4 flex-shrink-0">

@@ -7,13 +7,8 @@ CREATE TABLE produtos(
 	nome VARCHAR(200) NOT NULL,
 	valor FLOAT NOT NULL,
 	descricao VARCHAR(1000) NOT NULL,
-	PRIMARY KEY(id)
-);
-
-CREATE TABLE estoque(
-	id INT NOT NULL AUTO_INCREMENT,
-	id_prod INT NOT NULL,
-	quant INT NOT NULL,
+	imagem VARCHAR(400) NOT NULL,
+	estoque INT NULL,
 	PRIMARY KEY(id)
 );
 

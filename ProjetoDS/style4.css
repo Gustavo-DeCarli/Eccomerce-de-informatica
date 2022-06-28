@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
 
-    /* INDEX, LOGIN, REGISTER */
 .barra ul li a:hover {
   color: black;
   background-color: #FFF;
@@ -71,16 +70,6 @@
       background-color: black;
   }
 
-
-
-
-
-
-
-
-  
-
-
 .mt-50 {
     margin-top: 50px
 }
@@ -146,15 +135,6 @@ a {
     text-decoration: none !important
 }
 
-
-
-
-
-
-
-
-
-
 footer ul li a:hover{
   background-color: white;
   color: black;
@@ -191,4 +171,12 @@ footer {
 
 .card-title{
   font-size: 1em;
+}
+
+.detalhes{
+
+  background-color: #FFF;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-size: 35px;
+
 }
