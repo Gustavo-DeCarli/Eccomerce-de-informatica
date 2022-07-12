@@ -76,12 +76,15 @@ if (isset($_POST['logout'])) {
             foreach ($dados as $d) {
             ?>
                 <div class="col">
-                    <div class="card  h-100">
-                        <img src="<?php echo $d['imagem']; ?>" width="380" height="302" class="card-img-top">
-                            <div class="card-footer bg-transparent border-0 mb-2">
-                                <h5 class="card-text text-center"><?php echo $d['nome']; ?></h5>
-                                <a class="btn btn-primary d-flex justify-content-center" id="botao" href="detalhes.php?id=<?php echo $d['id'] ?>">Mais detalhes</a>
-                            </div>
+                    <div class="card h-100">
+                        <img src="<?php echo $d['imagem']; ?>" width="350" height="272" class="card-img-top">
+                        <div class="card-body bg-transparent mb-2">
+                            <h5 class="card-text text-center"><?php echo $d['nome']; ?></h5>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <h5 class="card-text text-center border-0">À vista R$ <?php echo $d['valor']; ?></h5>
+                            <a class="btn btn-primary p-2 d-flex justify-content-center" id="botao" href="detalhes.php?id=<?php echo $d['id'] ?>">Mais detalhes</a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>

@@ -174,9 +174,28 @@ footer {
 }
 
 .detalhes{
-
+  border-radius: 10px;
   background-color: #FFF;
   font-family: 'Kdam Thmor Pro', sans-serif;
   font-size: 35px;
 
+}
+
+.fonte{
+  font-size: 20px;
+}
+
+.desc{
+  text-align: center;
+  font-size: 30px;
+}
+.tamanho{
+  border-radius: 20px;
+  padding: 20px;
+}
+.textod{
+  font-size: 20px;
+}
+#chamados{
+  font-size: 20px;
 }

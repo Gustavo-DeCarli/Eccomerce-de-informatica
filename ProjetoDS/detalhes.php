@@ -67,7 +67,7 @@ if (isset($_POST['logout'])) {
     <div class="container">
         <div class="detalhes row mt-50">
             <div class="col">
-            <?php
+                <?php
                 include 'lib/conn.php';
                 $id = $_GET['id'];
                 $connection = DB::getInstance();
@@ -75,12 +75,20 @@ if (isset($_POST['logout'])) {
                 $dados->setFetchMode(PDO::FETCH_ASSOC);
                 foreach ($dados as $d) {
                 ?>
-                <img src="<?php echo $d['imagem']?>" width="600" height="560">
+                    <img src="<?php echo $d['imagem'] ?>" width="600" height="560">
             </div>
             <div class="col mt-5">
-                    <a><?php echo $d['nome'] ?><br></a>
-                    <a><button type=submit class="mt-4">Adicionar ao carrinho</button>R$ <?php echo $d['valor'] ?></a>
-                <?php } ?>
+                <a><?php echo $d['nome'] ?><br></a>
+                <a class="fonte">Estoque: <?php echo $d['estoque'] ?> unidades<br></a>
+                <div class="mt-5">
+                    <a>A partir de R$ <?php echo $d['valor'] ?></a>
+                </div>
+                <a><button type=submit class="tamanho  btn-success mt-4">Adicionar ao carrinho</button></a>
+            <?php } ?>
+            </div>
+            <div class="desc mt-2">
+                <a class='align-center'>Especificações:</a><br>
+                <a class='textod'><?php echo $d['descricao'] ?></a>
             </div>
         </div>
     </div>
