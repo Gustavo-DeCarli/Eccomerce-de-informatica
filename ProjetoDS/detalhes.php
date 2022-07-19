@@ -83,7 +83,7 @@ if (isset($_POST['logout'])) {
                 <div class="mt-5">
                     <a>A partir de R$ <?php echo $d['valor'] ?></a>
                 </div>
-                <a><button type=submit class="tamanho  btn-success mt-4">Adicionar ao carrinho</button></a>
+                <a><form action='lib/addcar.php' method="POST"><button type=submit name='botao' id='botao' value='<?php echo $d['id']?>' class="tamanho  btn-success mt-4">Adicionar ao carrinho</button></form></a>
             <?php } ?>
             </div>
             <div class="desc mt-2">

@@ -6,7 +6,7 @@ CREATE TABLE produtos(
 	id_categoria INT NOT NULL,
 	nome VARCHAR(200) NOT NULL,
 	valor FLOAT NOT NULL,
-	descricao VARCHAR(1000) NOT NULL,
+	descricao VARCHAR(3000) NOT NULL,
 	imagem VARCHAR(400) NOT NULL,
 	estoque INT NULL,
 	PRIMARY KEY(id)
@@ -32,6 +32,7 @@ CREATE TABLE usuario(
 
 CREATE TABLE pedidos(
 	id INT NOT NULL AUTO_INCREMENT,
+	id_user INT NOT NULL,
 	dataped DATE NOT NULL,
 	valor FLOAT NOT NULL,
 	PRIMARY KEY(id)
@@ -39,6 +40,7 @@ CREATE TABLE pedidos(
 
 CREATE TABLE carrinho(
 	id INT NOT NULL AUTO_INCREMENT,
+	id_user INT NOT NULL,
 	id_prod INT NOT NULL,
 	PRIMARY KEY(id)
 );

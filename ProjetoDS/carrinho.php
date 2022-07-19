@@ -65,10 +65,6 @@ if (isset($_POST['logout'])) {
         </div>
     </header>
 
-
-
-
-    
     <div class="tabela container container-fluid position-static">
         <table id='chamados' class='table rounded mt-50 bg-light'>
             <thead>
@@ -78,16 +74,32 @@ if (isset($_POST['logout'])) {
                 </tr>
             </thead>
             <tbody>
+            <?php
+                include 'lib/conn.php';
+                $userid = $_SESSION['user_id'];
+                $connection = DB::getInstance();
+                $dados = $connection->query("SELECT produtos.nome, produtos.valor, carrinho.id_prod FROM produtos INNER JOIN carrinho ON carrinho.id_prod = produtos.id WHERE id_user=$userid");
+                $dados->setFetchMode(PDO::FETCH_ASSOC);
+                foreach ($dados as $d) {
+                ?>
                 <tr>
-                    <td>NOTEBOOK GAMER MSI BRAVO 15</td>
-                    <td>R$ 6499,00 <form action='#' method='POST'><button name='id' id='id' value='ID' type='submit' class='btn p-1 btn-danger'>Remover</button></form>
+                    <td class="align-middle"><?php echo $d['nome'];?></td>
+                    <td>R$<?php echo $d['valor'];?><form action='lib/delcar.php' method='POST'><button name='remove' id='remove' value='<?php echo $d['id_prod']?>' type='submit' class='btn p-1 btn-danger'>Remover</button></form>
                     </td>
                 </tr>
+                <?php } ?>
             </tbody>
             <tfoot>
                 <tr>
                     <td></td>
-                    <th scope="row">Totals: R$ 6499,00 <form action='#' method='POST'><button name='id' id='id' value='id' type='submit' class='btn p-1 btn-success'>Finalizar</th>
+                    <?php 
+                    $dados2 = $connection->query("SELECT SUM(produtos.valor) as preco FROM produtos INNER JOIN carrinho ON carrinho.id_prod = produtos.id WHERE id_user=$userid");
+                    $dados2->setFetchMode(PDO::FETCH_ASSOC);
+                    $dadosf = $dados2->fetchAll();
+                    foreach ($dadosf as $valor){
+                    ?>
+                    <th scope=" col-auto">Total: R$<?php echo $valor['preco'];?><form action='#' method='POST'><button name='id' id='id' value='id' type='submit' class='col-auto btn p-1 btn-success'>Finalizar</th>
+                    <?php } ?>
                 </tr>
             </tfoot>
         </table>
