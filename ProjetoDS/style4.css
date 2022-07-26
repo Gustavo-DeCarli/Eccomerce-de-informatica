@@ -199,3 +199,10 @@ footer {
 #chamados{
   font-size: 20px;
 }
+
+.admin{
+  border-radius: 10px;
+  background-color: #FFF;
+  font-size: 20px;
+
+}

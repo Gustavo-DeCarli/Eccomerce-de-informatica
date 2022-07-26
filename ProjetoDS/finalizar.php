@@ -61,8 +61,8 @@ if (isset($_POST['logout'])) {
         </div>
     </header>
 
-    <div class="tabela container container-fluid position-static">
-        <table id='chamados' class='table rounded mt-50 bg-light'>
+    <div class="tabela2 container container-fluid position-static">
+        <table id='finaliza' class='table rounded mt-50 bg-light'>
             <thead>
                 <tr>
                     <th scope='col'>Produto</th>
@@ -70,7 +70,7 @@ if (isset($_POST['logout'])) {
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 include 'lib/conn.php';
                 $userid = $_SESSION['user_id'];
                 $connection = DB::getInstance();
@@ -78,28 +78,49 @@ if (isset($_POST['logout'])) {
                 $dados->setFetchMode(PDO::FETCH_ASSOC);
                 foreach ($dados as $d) {
                 ?>
-                <tr>
-                    <td class="align-middle"><?php echo $d['nome'];?></td>
-                    <td>R$<?php echo $d['valor'];?><form action='lib/delcar.php' method='POST'><button name='remove' id='remove' value='<?php echo $d['id_prod']?>' type='submit' class='btn p-1 btn-danger'>Remover</button></form>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="align-middle"><?php echo $d['nome']; ?></td>
+                        <td>R$<?php echo $d['valor']; ?>
+                        </td>
+                    </tr>
                 <?php } ?>
             </tbody>
             <tfoot>
                 <tr>
                     <td></td>
-                    <?php 
+                    <?php
                     $dados2 = $connection->query("SELECT SUM(produtos.valor) as preco FROM produtos INNER JOIN carrinho ON carrinho.id_prod = produtos.id WHERE id_user=$userid");
                     $dados2->setFetchMode(PDO::FETCH_ASSOC);
                     $dadosf = $dados2->fetchAll();
-                    foreach ($dadosf as $valor){
+                    foreach ($dadosf as $valor) {
                     ?>
-                    <th scope="col-auto">Total: R$<?php echo $valor['preco'];?><form action='finalizar.php' method="POST"><button type='submit' name='id' id='id' value="<?php echo $valor['preco']?>" class='col-auto btn p-1 btn-success'>Finalizar</button></form></th>
+                        <th scope="">Total mais frete(R$30): R$<?php echo $valor['preco']+30; ?>
+                            <form action='lib/verifp.php' method="POST" onchange="myFunction();">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="paga" name="paga" value="2">
+                                    <label class="form-check-label" for="cartao">Cartão</label><br>
+                                    <input class="form-check-input" type="radio" id="paga" name="paga" value="1">
+                                    <label class="form-check-label" for="boleto">Boleto</label><br>
+                                </div>
+                                <div id='m1' hidden>
+                                        <label for="ncartao">Número do cartão:</label>
+                                        <input type='number' id='ncartao' name='ncartao' placeholder="Número do cartão"><br>
+                                        <label for="cvv" class="mt-2">CVV do cartão:</label>
+                                        <input type='number' id='cvv' name='cvv' placeholder="CVV do cartão"><br>
+                                        <label for='validade' class="mt-2">Validade do cartão:</label>
+                                        <input type='month' id='validade' name='validade'><br>
+                                        <label for='nomec' class="mt-2">Nome impresso no cartão:</label>
+                                        <input type='number' id='nomec' name='nomec' placeholder="Nome impresso">
+                                </div>
+                                <button type='submit' name='ff' id='ff' class='btn p-1 btn-success'>Finalizar</button>
+
+                            </form>
+                        </th>
                     <?php } ?>
                 </tr>
             </tfoot>
         </table>
-        
+
 
 
 
@@ -139,6 +160,8 @@ if (isset($_POST['logout'])) {
             </footer>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    </div>
 </body>
 
 </html>
