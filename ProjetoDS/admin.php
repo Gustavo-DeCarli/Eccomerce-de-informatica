@@ -66,49 +66,49 @@ if (isset($_POST['logout'])) {
 
     <div class="container">
         <div class="admin row mt-50">
-            <form>
-            <fieldset>
+            <form  method="POST" action="lib/addprod.php" enctype="multipart/form-data" >
+                <fieldset>
                     <h3 class="text-center subhead">Adicionar Produtos</h3>
                     <div class="form-field">
                         <h4> Categoria: </h4>
                         <select class='form-control bg-light' name="categoria" type="text" id="categoria" aria-required="true" class="full-width">
                             <option>Selecione uma opção</option>
-                        <?php
+                            <?php
                             require 'lib/conn.php';
                             $connection = DB::getInstance();
-                            $stmt2 = $connection->query("SELECT nome_cat FROM categorias");
+                            $stmt2 = $connection->query("SELECT * FROM categorias");
                             $dadoscat = $stmt2->fetchAll();
                             foreach ($dadoscat as $d) {
-                                $select = "<option value='{$d['nome_cat']}'> {$d['nome_cat']}</option>";
+                                $select = "<option value='{$d['id']}'>{$d['nome_cat']}</option>";
                                 echo $select;
                             }
                             ?>
                         </select>
                     </div>
                     <div class="form-field">
-                        <label for='NOME'>Nome</label><br>
-                        <input name="NOME" type="text" id="NOME" placeholder="Insira aqui o nome do colaborador" aria-required="true">
+                        <label for='nome'>Nome</label><br>
+                        <input name="nome" type="text" id="nome" placeholder="Insira aqui o nome do produto" aria-required="true">
                     </div>
                     <div class="mt-2 form-field">
-                    <label for='DESCRICAO'>Descrição do produto </label>
-                        <textarea class='form-control bg-light' name="DESCRICAO" type="text" id="DESCRICAO" placeholder="Descreva o produto" aria-required="true" class="full-width" row=20></textarea>
+                        <label for='descricao'>Descrição do produto </label>
+                        <textarea class='form-control bg-light' name="descricao" type="text" id="DESCRICAO" placeholder="Descreva o produto" aria-required="true" class="full-width" row=20></textarea>
                     </div>
                     <div class="mt-2 form-field">
-                    <label for='valor'>Valor do produto </label>
-                        <input class='form-control bg-light' name="valor" type="number" id="valor" placeholder="Valor o produto" aria-required="true"></input>
+                        <label for='valor'>Valor do produto </label>
+                        <input class='form-control bg-light' step=0.01 name="valor" type="number" id="valor" placeholder="Valor o produto" aria-required="true"></input>
                     </div>
                     <div class="mt-2 form-field">
-                    <label for='estoque'>Estoque do produto </label>
+                        <label for='estoque'>Estoque do produto </label>
                         <input class='form-control bg-light' name="estoque" type="number" id="estoque" placeholder="Estoque o produto" aria-required="true"></input>
                     </div>
                     <div class="mt-2 form-field">
-                    <label for='FOTOA'> Foto </label><br>
+                        <label for='FOTOA'> Foto </label><br>
                         <input name="FOTOA" type="file" id="FOTOA" aria-required="true" class="full-width">
                     </div>
                     <div class="mt-2 form-field mt-4 mb-2">
                         <button type="submit" class="btn btn-primary btn-lg" style="background-color: #39b54a">Salvar</button>
                     </div>
-                    </fieldset>
+                </fieldset>
             </form>
         </div>
     </div>

@@ -95,7 +95,7 @@ if (isset($_POST['logout'])) {
                     foreach ($dadosf as $valor) {
                     ?>
                         <th scope="">Total mais frete(R$30): R$<?php echo $valor['preco']+30; ?>
-                            <form action='lib/verifp.php' method="POST" onchange="myFunction();">
+                            <form action='lib/addpedido.php' method="POST" onchange="myFunction();">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="paga" name="paga" value="2">
                                     <label class="form-check-label" for="cartao">Cartão</label><br>
