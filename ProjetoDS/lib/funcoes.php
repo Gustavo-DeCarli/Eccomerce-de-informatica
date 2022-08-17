@@ -11,6 +11,7 @@ class Funcoes
     private $descricao = '';
     private $imagem = '';
     private $estoque = '';
+    private $vt = '';
 
     function __toString()
     {
@@ -23,7 +24,8 @@ class Funcoes
             "valor" => $this->valor,
             "descricao" => $this->descricao,
             "imagem" => $this->imagem,
-            "estoque" => $this->estoque
+            "estoque" => $this->estoque,
+            "vt" => $this->vt
         ]);
     }
 
@@ -61,7 +63,7 @@ class Funcoes
     }
     function setIdProd($v)
     {
-        $this->idprod = $v;
+        $this->IdProd = $v;
     }
     function setPrevisao($v)
     {
@@ -71,6 +73,10 @@ class Funcoes
     {
         $this->conclusao = $v;
     }
+    function setvt($v)
+    {
+        $this->vt = $v;
+    }
 
     function addcar()
     {
@@ -79,11 +85,11 @@ class Funcoes
 
             $consulta = $connection->prepare("START TRANSACTION;");
             $consulta->execute();
-            $consulta = $connection->prepare("INSERT INTO carrinho VALUES (:id, :idprod, :iduser)");
+            $consulta = $connection->prepare("INSERT INTO carrinho VALUES (:id, :iduser, :idprod)");
             $consulta->execute([
                 ':id' => $this->id,
                 ':iduser' => $this->iduser,
-                ':idprod' => $this->idprod
+                ':idprod' => $this->IdProd
             ]);
             $consulta = $connection->prepare("COMMIT;");
             $consulta->execute();
@@ -115,7 +121,7 @@ class Funcoes
             die($e->getMessage());
         }
     }
-    
+
     function addprod()
     {
         $connection = DB::getInstance();
@@ -135,7 +141,7 @@ class Funcoes
             ]);
             $consulta = $connection->prepare("COMMIT;");
             $consulta->execute();
-            header('Location: ../index.php');
+            header('Location: ../admin.php');
         } catch (Exception $e) {
             $consulta = $connection->prepare("ROLLBACK;");
             $consulta->execute();
@@ -150,29 +156,37 @@ class Funcoes
             $consulta = $connection->prepare("START TRANSACTION;");
             $consulta->execute();
 
-            $consulta = $connection->prepare("SELECT ID_PROD, COUNT(id_prod) FROM carrinho WHERE id_user=:iduser GROUP BY ID_PROD;");
+            $consulta = $connection->prepare("SELECT ID_PROD, COUNT(id_prod) as quantidade FROM carrinho WHERE id_user=:iduser GROUP BY ID_PROD;");
             $dados = $consulta->execute([
                 ':iduser' => $this->iduser
             ]);
+            $consulta->setFetchMode(PDO::FETCH_ASSOC);
             $dados = $consulta->fetchall();
-            $prod= array_combine($dados, $dados);
-            print($prod);
+            foreach ($dados as $dado) {
+                $q = $dado['quantidade'];
+                $p = $dado['ID_PROD'];
+                $consulta = $connection->prepare("UPDATE produtos SET estoque=estoque-$q WHERE id=$p");
+                $consulta->execute();
+            }
+            $data = date('Y-m-d');
+            $consulta = $connection->prepare("INSERT INTO pedidos VALUES (null, :iduser, '$data', :vt)");
+            $consulta->execute([
+                ':iduser' => $this->iduser,
+                ':vt' => $this->vt
+            ]);
 
-            // $consulta = $connection->prepare("UPDATE produtos SET estoque=estoque- WHERE id=:id");
-            // $consulta->execute([
-            //     ':id' => $this->id,
-            //     ':idprod' => $this->idprod
-            // ]);
+            $consulta = $connection->prepare("DELETE FROM carrinho WHERE id_user=:iduser");
+            $consulta->execute([
+                ':iduser' => $this->iduser
+            ]);
 
             $consulta = $connection->prepare("COMMIT;");
             $consulta->execute();
-            // header('Location: ../index.php');
+            header('Location: ../index.php');
         } catch (Exception $e) {
             $consulta = $connection->prepare("ROLLBACK;");
             $consulta->execute();
             die($e->getMessage());
         }
     }
-
-
 }

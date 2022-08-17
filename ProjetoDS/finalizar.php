@@ -44,9 +44,8 @@ if (isset($_POST['logout'])) {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="AA" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item text-dark" href="A">Componentes</a></li>
-                            <li><a class="dropdown-item text-dark" href="A">Periféricos</a></li>
-                            <li><a class="dropdown-item text-dark" href="A">Cadeiras</a></li>
+                            <li><a class="dropdown-item text-dark" href="componentes.php">Componentes</a></li>
+                            <li><a class="dropdown-item text-dark" href="perifericos.php">Periféricos</a></li>
                         </ul>
                     </li>
                     <li><a href="contato.php" class="nav-link px-2 text-white">Contato</a></li>
@@ -96,6 +95,7 @@ if (isset($_POST['logout'])) {
                     ?>
                         <th scope="">Total mais frete(R$30): R$<?php echo $valor['preco']+30; ?>
                             <form action='lib/addpedido.php' method="POST" onchange="myFunction();">
+                            <input type='hidden' value='<?php echo $valor['preco']+30; ?>' name='vt'>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="paga" name="paga" value="2">
                                     <label class="form-check-label" for="cartao">Cartão</label><br>

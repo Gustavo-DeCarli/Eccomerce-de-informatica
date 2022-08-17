@@ -1,12 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    echo '<script type="text/javascript">';
-    echo 'alert("Login necessário");';
-    echo 'window.location.href = "login.php";';
-    echo '</script>';
-    exit;
-}
 if (isset($_POST['logout'])) {
     session_destroy();
     header('Location: index.php');
@@ -42,7 +35,7 @@ if (isset($_POST['logout'])) {
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="index.php" class="nav-link px-2 text-white">Página Inicial</a></li>
                     <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="AA" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+                        <a class="nav-link dropdown-toggle text-white" href="AA" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item text-dark" href="componentes.php">Componentes</a></li>
                             <li><a class="dropdown-item text-dark" href="perifericos.php">Periféricos</a></li>
@@ -57,31 +50,41 @@ if (isset($_POST['logout'])) {
                 </form>
                 <li><a href="carrinho.php"><img class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" src="images/carrinho.png" width="50" height="50"></a></li>
                 <div class="text-end">
-                    <button type="button" ID="logout" class="btn btn-outline-light me-2"><a href="login.php">Logout<a></button>
+                    <button type="button" ID="logout" class="btn btn-outline-light me-2"><a href="login.php">Logout</a></button>
                 </div>
             </div>
         </div>
     </header>
 
+    <img id="capa" src="images/capa.png">
 
-    <div class="tabela container container-fluid d-flex justify-content-center">
-        <table id='chamados' class='table rounded mt-50 bg-light' style='width:60%'>
-            <tbody>
-                <tr>
-                    <td class="text-center">
-                        </p>Contato</p>
-                        </p>Email: suporte@pcboost.com</p>
-                        </p>Telefone: (54) 6666-6666</p>
-                        </p>Endereço: Rua Senador Filho Nº2345, Bairro Laranjeiras - Bento gonçalves-RS</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
+            <?php
+            include 'lib/conn.php';
+            $connection = DB::getInstance();
+            $dados = $connection->query("SELECT * from produtos WHERE id_categoria=2 ORDER BY RAND()");
+            $dados->setFetchMode(PDO::FETCH_ASSOC);
+            foreach ($dados as $d) {
+            ?>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="<?php echo $d['imagem']; ?>" width="350" height="272" class="card-img-top">
+                        <div class="card-body bg-transparent mb-2">
+                            <h5 class="card-text text-center"><?php echo $d['nome']; ?></h5>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <h5 class="card-text text-center border-0">À vista R$ <?php echo $d['valor']; ?></h5>
+                            <a class="btn btn-primary p-2 d-flex justify-content-center" id="botao" href="detalhes.php?id=<?php echo $d['id'] ?>">Mais detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div><br>
 
-
-    <div class="d-flex flex-column container-fluid position-absolute start-50 translate-middle fixed-bottom">
-        <footer class="w-100 py-4 flex-shrink-0 fixed-bottom">
+    <div class="d-flex flex-column h-100 mt-50">
+        <footer class="w-100 py-4 flex-shrink-0">
             <div class="container py-4">
                 <div class="row gy-4 gx-5">
                     <div class="col-lg-4 col-md-6">
@@ -111,3 +114,7 @@ if (isset($_POST['logout'])) {
             </div>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+</html>

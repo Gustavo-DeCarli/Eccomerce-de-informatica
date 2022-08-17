@@ -44,9 +44,8 @@ if (isset($_POST['logout'])) {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="AA" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item text-dark" href="A">Componentes</a></li>
-                            <li><a class="dropdown-item text-dark" href="A">Periféricos</a></li>
-                            <li><a class="dropdown-item text-dark" href="A">Cadeiras</a></li>
+                            <li><a class="dropdown-item text-dark" href="componentes.php">Componentes</a></li>
+                            <li><a class="dropdown-item text-dark" href="perifericos.php">Periféricos</a></li>
                         </ul>
                     </li>
                     <li><a href="contato.php" class="nav-link px-2 text-white">Contato</a></li>
@@ -87,7 +86,7 @@ if (isset($_POST['logout'])) {
                     </div>
                     <div class="form-field">
                         <label for='nome'>Nome</label><br>
-                        <input name="nome" type="text" id="nome" placeholder="Insira aqui o nome do produto" aria-required="true">
+                        <input class='form-control bg-light' name="nome" type="text" id="nome" placeholder="Insira aqui o nome do produto" aria-required="true">
                     </div>
                     <div class="mt-2 form-field">
                         <label for='descricao'>Descrição do produto </label>

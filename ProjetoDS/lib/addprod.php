@@ -20,7 +20,6 @@ try {
     $s->setimagem($certo);
     json_encode($s);
     $s->addprod();
-    print $s;
 }catch(Exception $e){
     print json_encode([
         "error" => true,

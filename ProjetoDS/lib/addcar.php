@@ -7,7 +7,6 @@ try {
     $s->setIdUser($_SESSION['user_id']);
     json_encode($s);
     $s->addcar();
-    print $s;
 }catch(Exception $e){
     print json_encode([
         "error" => true,
