@@ -93,7 +93,7 @@ if (isset($_POST['logout'])) {
                     $dadosf = $dados2->fetchAll();
                     foreach ($dadosf as $valor) {
                     ?>
-                        <th scope="">Total mais frete(R$30): R$<?php echo $valor['preco']+30; ?>
+                        <th scope="">Total mais frete(R$30): R$<?php echo round($valor['preco']+30 , 2); ?>
                             <form action='lib/addpedido.php' method="POST" onchange="myFunction();">
                             <input type='hidden' value='<?php echo $valor['preco']+30; ?>' name='vt'>
                                 <div class="form-check">

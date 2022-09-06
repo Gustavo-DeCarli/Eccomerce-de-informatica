@@ -93,7 +93,7 @@ if (isset($_POST['logout'])) {
                     $dadosf = $dados2->fetchAll();
                     foreach ($dadosf as $valor) {
                     ?>
-                        <th scope="col-auto">Total: R$<?php echo $valor['preco']; ?><form action='finalizar.php' method="POST"><button type='submit' name='id' id='id' value="<?php echo $valor['preco'] ?>" class='col-auto btn p-1 btn-success'>Finalizar</button></form>
+                        <th scope="col-auto">Total: R$<?php echo round($valor['preco'], 2); ?><form action='finalizar.php' method="POST"><button type='submit' name='id' id='id' value="<?php echo $valor['preco'] ?>" class='col-auto btn p-1 btn-success'>Finalizar</button></form>
                         </th>
                     <?php } ?>
                 </tr>
